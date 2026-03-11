@@ -10,4 +10,8 @@ this is basically just this repo patches, just rebased on top of master; plus so
 
 https://github.com/fronbasal/fasthttp-utls
 
+It also has an extremely stupid cookie jar; at first forked from here, but then changed so much it's basically a different code
+
+https://github.com/dgrr/cookiejar/blob/master/cookiejar.go
+
 licence MIT

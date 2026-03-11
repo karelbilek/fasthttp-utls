@@ -339,6 +339,12 @@ type Client struct {
 
 	// StreamResponseBody enables response body streaming.
 	StreamResponseBody bool
+
+	// extremely stupid cookie jar.
+	// * sets cookie on every response, whatever the code is
+	// * cookies are set cross-host
+	// Only if it's not nil.
+	CookieJar *CookieJar
 }
 
 // Get returns the status code and body of url.
@@ -580,6 +586,7 @@ func (c *Client) hostClient(host []byte, isTLS bool) (*HostClient, error) {
 		StreamResponseBody:            c.StreamResponseBody,
 		clientReaderPool:              &c.readerPool,
 		clientWriterPool:              &c.writerPool,
+		cookiejar:                     c.CookieJar,
 	}
 
 	if c.ConfigureClient != nil {
@@ -932,6 +939,8 @@ type HostClient struct {
 	StreamResponseBody bool
 
 	connsCleanerRun bool
+
+	cookiejar *CookieJar
 }
 
 type clientConn struct {
@@ -1499,8 +1508,14 @@ func (c *HostClient) doNonNilReqResp(req *Request, resp *Response) (bool, error)
 			req.Header.userAgent = append(req.Header.userAgent[:0], userAgent...)
 		}
 	}
-
-	return c.transport().RoundTrip(c, req, resp)
+	if c.cookiejar != nil {
+		c.cookiejar.FillRequest(req)
+	}
+	retry, err := c.transport().RoundTrip(c, req, resp)
+	if c.cookiejar != nil && err != nil {
+		c.cookiejar.ReadResponse(resp)
+	}
+	return retry, err
 }
 
 func (c *HostClient) transport() RoundTripper {

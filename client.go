@@ -2020,6 +2020,7 @@ func tlsClientHandshake(rawConn net.Conn, tlsConfig *tls.Config, clientHelloID t
 
 	conn := tls.UClient(rawConn, tlsConfig, clientHelloID)
 	if clientHelloSpec != nil {
+		conn = tls.UClient(rawConn, tlsConfig, tls.HelloCustom)
 		err := conn.ApplyPreset(clientHelloSpec)
 		if err != nil {
 			return nil, err
@@ -2071,7 +2072,9 @@ func dialAddr(
 	if isTLS && !isTLSAlready {
 		if writeTimeout == 0 {
 			if clientHelloSpec != nil {
-				return tls.UClient(conn, tlsConfig, tls.HelloCustom), nil
+				conn := tls.UClient(conn, tlsConfig, tls.HelloCustom)
+				err = conn.ApplyPreset(clientHelloSpec)
+				return conn, err
 			}
 			return tls.UClient(conn, tlsConfig, *clientHelloID), nil
 		}

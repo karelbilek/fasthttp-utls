@@ -9,8 +9,8 @@ import (
 	"os/exec"
 	"runtime"
 
-	"github.com/valyala/fasthttp"
-	"github.com/valyala/fasthttp/reuseport"
+	"github.com/karelbilek/fasthttp-utls"
+	"github.com/karelbilek/fasthttp-utls/reuseport"
 )
 
 const (

@@ -8,7 +8,7 @@ import (
 
 	"github.com/andybalholm/brotli"
 	"github.com/valyala/bytebufferpool"
-	"github.com/valyala/fasthttp/stackless"
+	"github.com/karelbilek/fasthttp-utls/stackless"
 )
 
 // Supported compression levels.

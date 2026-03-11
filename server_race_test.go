@@ -7,7 +7,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/valyala/fasthttp/fasthttputil"
+	"github.com/karelbilek/fasthttp-utls/fasthttputil"
 )
 
 func TestServerDoneRace(t *testing.T) {

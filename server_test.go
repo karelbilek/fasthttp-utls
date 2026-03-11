@@ -22,7 +22,7 @@ import (
 
 	tls "github.com/refraction-networking/utls"
 
-	"github.com/valyala/fasthttp/fasthttputil"
+	"github.com/karelbilek/fasthttp-utls/fasthttputil"
 )
 
 // Make sure RequestCtx implements context.Context.

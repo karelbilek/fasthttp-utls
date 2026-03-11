@@ -1,7 +1,7 @@
 package fasthttpproxy
 
 import (
-	"github.com/valyala/fasthttp"
+	"github.com/karelbilek/fasthttp-utls"
 	"golang.org/x/net/http/httpproxy"
 )
 

@@ -1,4 +1,4 @@
-module github.com/valyala/fasthttp
+module github.com/karelbilek/fasthttp-utls
 
 go 1.24.0
 

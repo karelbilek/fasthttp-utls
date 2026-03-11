@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/valyala/fasthttp"
+	"github.com/karelbilek/fasthttp-utls"
 )
 
 var domains = make(map[string]fasthttp.RequestHandler)

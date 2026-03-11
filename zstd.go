@@ -8,7 +8,7 @@ import (
 
 	"github.com/klauspost/compress/zstd"
 	"github.com/valyala/bytebufferpool"
-	"github.com/valyala/fasthttp/stackless"
+	"github.com/karelbilek/fasthttp-utls/stackless"
 )
 
 const (

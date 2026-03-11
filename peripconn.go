@@ -1,9 +1,10 @@
 package fasthttp
 
 import (
-	"crypto/tls"
 	"net"
 	"sync"
+
+	tls "github.com/refraction-networking/utls"
 )
 
 type perIPConnCounter struct {
